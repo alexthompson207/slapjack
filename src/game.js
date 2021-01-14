@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player('player1');
     this.player2 = new Player('player2');
     this.centerPile = [];
-    this.turn = false;
+    this.currentPlayer = true;
     this.deck = [
       { src: "./assets/blue-01.png", number: 1 },
       { src: "./assets/blue-02.png", number: 2 },
@@ -76,6 +76,10 @@ class Game {
    this.shuffleCards(this.deck);
    this.player1.hand = this.deck.slice(0, 26);
    this.player2.hand = this.deck.slice(26, 51);
+ }
+
+ playerTurn() {
+   this.currentPlayer = !this.currentPlayer;
  }
 
 }
