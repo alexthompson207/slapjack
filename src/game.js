@@ -93,12 +93,24 @@ class Game {
      this.player1.playCard();
      this.centerPile.unshift(this.player1.hand[0]);
      this.playerTurn();
+     console.log(this.centerPile);
    } else if (this.player2.currentPlayer) {
      this.player2.playCard();
      this.centerPile.unshift(this.player2.hand[0]);
      this.playerTurn();
+     console.log(this.centerPile);
    }
+ }
 
+ legalSlap(player) {
+   var topCard = this.centerPile[0];
+   var secondCard = this.centerPile[1];
+   var thirdCard = this.centerPile[2];
+   if(topCard.number === 11) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
+     this.centerPile = [];
+     this.shuffleCards(this[player].hand);
+   }
  }
 
 
