@@ -79,17 +79,25 @@ class Game {
  }
 
  playerTurn() {
-   this.player1.currentPlayer = !this.player2.currentPlayer;
+   if (this.player1.currentPlayer && this.player1.hand.length > 0 && this.player2.hand.length > 0) {
+     this.player1.currentPlayer = false;
+     this.player2.currentPlayer = true;
+   } else if (this.player2.currentPlayer && this.player1.hand.length > 0 && this.player2.hand.length > 0) {
+     this.player1.currentPlayer = true;
+     this.player2.currentPlayer = false;
+   }
  }
 
  playCardToMiddle() {
-   //if key q and = turn is true do:
-   this.player1.playCard();
-   this.centerPile.unshift(this.player1.hand[0]);
-
-   //if key p and = turn is true do:
-   this.player2.playCard();
-   this.centerPile.unshift(this.player2.hand[0]);
+   if (this.player1.currentPlayer) {
+     this.player1.playCard();
+     this.centerPile.unshift(this.player1.hand[0]);
+     this.playerTurn();
+   } else if (this.player2.currentPlayer) {
+     this.player2.playCard();
+     this.centerPile.unshift(this.player2.hand[0]);
+     this.playerTurn();
+   }
 
  }
 
