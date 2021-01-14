@@ -83,10 +83,13 @@ class Game {
  }
 
  playCardToMiddle() {
+   //if key q and = turn is true do:
    this.player1.playCard();
    this.centerPile.unshift(this.player1.hand[0]);
 
-   // this.player2.playCard();
+   //if key p and = turn is true do:
+   this.player2.playCard();
+   this.centerPile.unshift(this.player2.hand[0]);
 
  }
 
