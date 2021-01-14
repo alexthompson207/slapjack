@@ -59,6 +59,17 @@ class Game {
       { src: "./assets/red-queen.png", number: 12 },
       { src: "./assets/red-king.png", number: 13 },
     ];
-
   }
+
+  shuffleCards(deck) {
+    for (var i = deck.length - 1; i > 0; i--) {
+    var swapIndex = Math.floor(Math.random() * (i + 1))
+    var currentCard = deck[i]
+    var cardToSwap = deck[swapIndex]
+    deck[i] = cardToSwap;
+    deck[swapIndex] = currentCard;
+  }
+  return deck
+}
+
 }
