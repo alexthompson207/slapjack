@@ -106,10 +106,20 @@ class Game {
    var topCard = this.centerPile[0];
    var secondCard = this.centerPile[1];
    var thirdCard = this.centerPile[2];
-   if(topCard.number === 11) {
+   if (topCard.number === 11) {
      this[player].hand = this[player].hand.concat(this.centerPile);
      this.centerPile = [];
      this.shuffleCards(this[player].hand);
+   } else if (topCard.number === secondCard.number) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
+     this.centerPile = [];
+     this.shuffleCards(this[player].hand);
+   } else if (topCard.number === thirdCard.number) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
+     this.centerPile = [];
+     this.shuffleCards(this[player].hand);
+   } else {
+     badSlap();
    }
  }
 
