@@ -4,7 +4,6 @@ class Game {
     this.player1 = new Player('player1');
     this.player2 = new Player('player2');
     this.centerPile = [];
-    this.currentPlayer = true;
     this.deck = [
       { src: "./assets/blue-01.png", number: 1 },
       { src: "./assets/blue-02.png", number: 2 },
@@ -75,11 +74,21 @@ class Game {
  dealDeck() {
    this.shuffleCards(this.deck);
    this.player1.hand = this.deck.slice(0, 26);
-   this.player2.hand = this.deck.slice(26, 51);
+   this.player2.hand = this.deck.slice(26, 52);
+   this.deck = [];
  }
 
  playerTurn() {
-   this.currentPlayer = !this.currentPlayer;
+   this.player1.currentPlayer = !this.player2.currentPlayer;
  }
+
+ playCardToMiddle() {
+   this.player1.playCard();
+   this.centerPile.unshift(this.player1.hand[0]);
+
+   // this.player2.playCard();
+
+ }
+
 
 }
