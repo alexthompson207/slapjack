@@ -12,10 +12,11 @@
 }
 
 .cards {
-  max-width: 200px;
+  width: 250px;
+  height: 375px;
   border-radius: 20px;
-  margin-top: 60px;
-
+  margin-top: 80px;
+  margin-bottom: 20px;
 }
 
 .title {
@@ -28,4 +29,13 @@
 .game-view {
   display: flex;
   justify-content: space-around;
+}
+
+.player-name {
+  text-align: center;
+}
+
+.player-one-wins,
+.player-two-wins {
+  text-align: center;
 }
