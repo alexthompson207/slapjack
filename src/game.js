@@ -90,15 +90,13 @@ class Game {
 
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
-     this.centerPile.unshift(this.player1.hand[0]);
+     // this.centerPile.unshift(this.player1.hand[0]);
      this.player1.playCard();
      this.playerTurn();
-     console.log(this.centerPile);
    } else if (this.player2.currentPlayer) {
-     this.centerPile.unshift(this.player2.hand[0]);
+     // this.centerPile.unshift(this.player2.hand[0]);
      this.player2.playCard();
      this.playerTurn();
-     console.log(this.centerPile);
    }
  }
 
@@ -130,13 +128,22 @@ class Game {
  // }
 
   badSlap() {
-    //player 1 bad slap --make dynamic!!
+    //player 1 bad slap --make dynamic!! use id?
     this.player2.hand.push(this.player1.hand[0]);
     this.player1.hand.shift();
   }
 
   survivalRound() {
 
+
+  }
+
+  gameEndSlap() {
+    if (this.player1.hand.length === 0) {
+      this.player2.wins++;
+    } else if (this.player2.hand.length === 0) {
+      this.player1.wins++;
+    }
   }
 
 
