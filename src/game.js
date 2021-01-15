@@ -146,5 +146,15 @@ class Game {
     }
   }
 
+  resetDeck() {
+    this.deck = this.centerPile;
+    this.deck = this.deck.concat(this.player1.hand);
+    this.deck = this.deck.concat(this.player1.hand);
+    this.centerPile = [];
+    this.player1.hand = [];
+    this.player2.hand = [];
+
+  }
+
 
 }
