@@ -90,13 +90,13 @@ class Game {
 
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
-     this.player1.playCard();
      this.centerPile.unshift(this.player1.hand[0]);
+     this.player1.playCard();
      this.playerTurn();
      console.log(this.centerPile);
    } else if (this.player2.currentPlayer) {
-     this.player2.playCard();
      this.centerPile.unshift(this.player2.hand[0]);
+     this.player2.playCard();
      this.playerTurn();
      console.log(this.centerPile);
    }
@@ -122,6 +122,12 @@ class Game {
      badSlap();
    }
  }
+
+  badSlap() {
+    this.player2.hand.push(this.player1.hand[0]);
+    this.player1.hand.shift();
+
+  }
 
 
 }
