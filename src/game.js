@@ -90,9 +90,11 @@ class Game {
 
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
+     this.centerPile.unshift(this.player1.hand[0]);
      this.player1.playCard();
      this.playerTurn();
    } else if (this.player2.currentPlayer) {
+     this.centerPile.unshift(this.player2.hand[0]);
      this.player2.playCard();
      this.playerTurn();
    }
@@ -121,9 +123,10 @@ class Game {
     if (event.key === "f") {
       this.player2.hand.push(this.player1.hand[0]);
       this.player1.hand.shift();
-    } else if (event.key === "j") {}
+    } else if (event.key === "j") {
       this.player1.hand.push(this.player2.hand[0]);
       this.player2.hand.shift();
+    }
   }
 
   survivalPlayerTurn() {
