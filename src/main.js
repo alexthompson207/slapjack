@@ -6,7 +6,7 @@ var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
-// window.addEventListener('keydown', handlePlayerEvents)
+window.addEventListener('keydown', handlePlayerEvents)
 //keys player1 deal: q
 //keys player1 deal: p
 //handle keys if event type = f or j do handleSlap
@@ -19,6 +19,16 @@ function startNewGame() {
   currentGame.dealDeck();
   resetCenterPile();
 }
+
+function handlePlayerEvents(event) {
+  if (event.key === "q" && currentGame.player1.currentPlayer) {
+    currentGame.playCardToMiddle();
+  } else if (event.key === "p" && currentGame.player2.currentPlayer) {
+    currentGame.playCardToMiddle();
+  }
+  displayCenterPile();
+}
+
 
 function handleSlap() {
 if (topCard.number === 11 || topCard.number === secondCard.number || topCard.number === thirdCard.number) {

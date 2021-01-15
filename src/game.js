@@ -88,7 +88,7 @@ class Game {
    }
  }
 
- playCardToMiddle() {
+ playCardToMiddle(event) {
    if (this.player1.currentPlayer) {
      this.centerPile.unshift(this.player1.hand[0]);
      this.player1.playCard();
