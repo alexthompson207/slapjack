@@ -100,7 +100,7 @@ class Game {
    }
  }
 
- legalSlap(player) {
+ legalSlap(event) {
    var topCard = this.centerPile[0];
    var secondCard = this.centerPile[1];
    var thirdCard = this.centerPile[2];
@@ -127,8 +127,9 @@ class Game {
  //   this.shuffleCards(this[player].hand);
  // }
 
-  badSlap() {
-    //player 1 bad slap --make dynamic!! use id?
+
+  badSlap(event) {
+    //player 1 bad slap if(event.target.key === f) --make dynamic!! use id?
     this.player2.hand.push(this.player1.hand[0]);
     this.player1.hand.shift();
   }
