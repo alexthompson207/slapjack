@@ -118,14 +118,24 @@ class Game {
      this[player].hand = this[player].hand.concat(this.centerPile);
      this.centerPile = [];
      this.shuffleCards(this[player].hand);
-   } else {
-     badSlap();
+   // } else {
+   //   badSlap();
    }
  }
 
+ // winTurn(player) {
+ //   this[player].hand = this[player].hand.concat(this.centerPile);
+ //   this.centerPile = [];
+ //   this.shuffleCards(this[player].hand);
+ // }
+
   badSlap() {
+    //player 1 bad slap --make dynamic!!
     this.player2.hand.push(this.player1.hand[0]);
     this.player1.hand.shift();
+  }
+
+  survivalRound() {
 
   }
 
