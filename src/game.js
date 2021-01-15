@@ -133,9 +133,26 @@ class Game {
     this.player1.hand.shift();
   }
 
-  survivalRound() {
+  survivalPlayerTurn() {
+    if (this.player1.currentPlayer && this.player1.hand.length === 0) {
+      this.player1.currentPlayer = false;
+      this.player2.currentPlayer = true;
+    } else if (this.player2.currentPlayer && this.player2.hand.length === 0) {
+      this.player1.currentPlayer = true;
+      this.player2.currentPlayer = false;
+    }
+  }
 
-
+  survivalShuffle() {
+    if(this.player1.currentPlayer) {
+      this.player1.hand = this.centerPile;
+      this.centerPile = [];
+      this.shuffleCards(this.player1.hand);
+    } else if (this.player2.currentPlayer) {
+      this.player2.hand = this.centerPile;
+      this.centerPile = [];
+      this.shuffleCards(this.player2.hand);
+    }
   }
 
   gameEndSlap() {
