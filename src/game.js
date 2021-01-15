@@ -90,34 +90,23 @@ class Game {
 
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
-     // this.centerPile.unshift(this.player1.hand[0]);
      this.player1.playCard();
      this.playerTurn();
    } else if (this.player2.currentPlayer) {
-     // this.centerPile.unshift(this.player2.hand[0]);
      this.player2.playCard();
      this.playerTurn();
    }
  }
 
  legalSlap(event) {
-   var topCard = this.centerPile[0];
-   var secondCard = this.centerPile[1];
-   var thirdCard = this.centerPile[2];
-   if (topCard.number === 11) {
-     this[player].hand = this[player].hand.concat(this.centerPile);
+   if (event.key === "f") {
+     this.player1.hand = this.player1.hand.concat(this.centerPile);
      this.centerPile = [];
-     this.shuffleCards(this[player].hand);
-   } else if (topCard.number === secondCard.number) {
-     this[player].hand = this[player].hand.concat(this.centerPile);
+     this.shuffleCards(this.player1.hand);
+   } else if (event.key === "j") {
+     this.player2.hand = this.player2.hand.concat(this.centerPile);
      this.centerPile = [];
-     this.shuffleCards(this[player].hand);
-   } else if (topCard.number === thirdCard.number) {
-     this[player].hand = this[player].hand.concat(this.centerPile);
-     this.centerPile = [];
-     this.shuffleCards(this[player].hand);
-   // } else {
-   //   badSlap();
+     this.shuffleCards(this.player2.hand);
    }
  }
 
@@ -129,9 +118,12 @@ class Game {
 
 
   badSlap(event) {
-    //player 1 bad slap if(event.target.key === f) --make dynamic!! use id?
-    this.player2.hand.push(this.player1.hand[0]);
-    this.player1.hand.shift();
+    if (event.key === "f") {
+      this.player2.hand.push(this.player1.hand[0]);
+      this.player1.hand.shift();
+    } else if (event.key === "j") {}
+      this.player1.hand.push(this.player2.hand[0]);
+      this.player2.hand.shift();
   }
 
   survivalPlayerTurn() {
