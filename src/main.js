@@ -20,14 +20,32 @@ function startNewGame() {
   resetCenterPile();
 }
 
+// function handlePlayerEvents(event) {
+//   if (event.key === 'q' || event.key === 'p') {
+//     playerDealsACard();
+//   }
+//   displayCenterPile();
+// }
+
+
+
 function handlePlayerEvents(event) {
   if (event.key === "q" && currentGame.player1.currentPlayer) {
-    currentGame.playCardToMiddle();
+    currentGame.playCardToMiddle('player1');
   } else if (event.key === "p" && currentGame.player2.currentPlayer) {
-    currentGame.playCardToMiddle();
+    currentGame.playCardToMiddle('player2');
   }
   displayCenterPile();
 }
+
+
+// function playerDealsACard() {
+//   if (currentGame.player1.currentPlayer) {
+//     currentGame.playCardToMiddle('player1');
+//   } else if (currentGame.player2.currentPlayer) {
+//     currentGame.playCardToMiddle('player2');
+//   }
+// }
 
 
 function handleSlap() {

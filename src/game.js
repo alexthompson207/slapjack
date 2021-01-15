@@ -88,17 +88,26 @@ class Game {
    }
  }
 
- playCardToMiddle(event) {
-   if (this.player1.currentPlayer) {
-     this.centerPile.unshift(this.player1.hand[0]);
-     this.player1.playCard();
-     this.playerTurn();
-   } else if (this.player2.currentPlayer) {
-     this.centerPile.unshift(this.player2.hand[0]);
-     this.player2.playCard();
+ playCardToMiddle(player) {
+   if (this[player].currentPlayer) {
+     this.centerPile.unshift(this[player].hand[0]);
+     this[player].playCard();
      this.playerTurn();
    }
  }
+
+
+ // playCardToMiddle() {
+ //   if (this.player1.currentPlayer) {
+ //     this.centerPile.unshift(this.player1.hand[0]);
+ //     this.player1.playCard();
+ //     this.playerTurn();
+ //   } else if (this.player2.currentPlayer) {
+ //     this.centerPile.unshift(this.player2.hand[0]);
+ //     this.player2.playCard();
+ //     this.playerTurn();
+ //   }
+ // }
 
  legalSlap(event) {
    if (event.key === "f") {
