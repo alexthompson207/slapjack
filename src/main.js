@@ -34,6 +34,12 @@ function handlePlayerEvents(event) {
     currentGame.playCardToMiddle('player1');
   } else if (event.key === "p" && currentGame.player2.currentPlayer) {
     currentGame.playCardToMiddle('player2');
+  } else if (event.key === 'f') {
+    //player1 slaps
+    handleSlapOutcome(event)
+  } else if (event.key === 'j') {
+    //player2 slaps
+    handleSlapOutcome(event)
   }
   displayCenterPile();
 }
@@ -46,14 +52,19 @@ function handlePlayerEvents(event) {
 //     currentGame.playCardToMiddle('player2');
 //   }
 // }
-
-
-function handleSlap() {
-if (topCard.number === 11 || topCard.number === secondCard.number || topCard.number === thirdCard.number) {
-  this[player].hand = this[player].hand.concat(this.centerPile);
-  this.centerPile = [];
-  this.shuffleCards(this[player].hand); //gameinstance.legalSlap()
+function handlePlayerTurn() {
+  
 }
+
+function handleSlapOutcome(event) {
+  var currentCard = currentGame.centerPile[0].number;
+  if (currentCard === 11 || currentCard === currentGame.centerPile[1].number || currentCard === currentGame.centerPile[2].number) {
+    handleLegalSlap(event)
+  }
+}
+
+function handleLegalSlap(event) {
+  currentGame.legalSlap(event);
 }
 
 function displayCenterPile() {
