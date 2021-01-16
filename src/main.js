@@ -88,20 +88,32 @@ function handlePlayer2Turn() {
 
 function handleSlapOutcome(event) {
   var currentCard = currentGame.centerPile[0].number;
-  if (currentCard === 11 || currentCard === currentGame.centerPile[1].number || currentCard === currentGame.centerPile[2].number) {
-    handleLegalSlap(event)
+  if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
+    //survivalRoundSlap
+  } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
+    currentGame.legalSlap(event);
+    console.log('SLAPPER!!');
   } else {
-    handleBadSlap(event)
+    handleBadSlap(event);
+    console.log('BAD SLAP');
   }
 }
+
+// if (currentCard === 11 || currentCard === currentGame.centerPile[1].number || currentCard === currentGame.centerPile[2].number) {
+//   handleLegalSlap(event)
+// }
 
 function handleBadSlap(event) {
   currentGame.badSlap(event);
 }
 
 
-function handleLegalSlap(event) {
-  currentGame.legalSlap(event);
+function handleLegalSlapPlayer1(event) {
+  if(currentGame.player1.hand > 0 && currentGame.player2.hand === 0) {
+    currentGame.gameEndSlap();
+  } else if (currentGame.player1.hand === 0) {
+    currentGame.legalSlap(event);
+  }
 }
 
 function displayCenterPile() {
