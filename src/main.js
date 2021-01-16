@@ -52,7 +52,7 @@ function handlePlayer1Turn() {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player2.hand.length === 0) {
-    console.log('hi');
+    console.log('One');
     currentGame.survivalPlayerTurn();
   } else {
     currentGame.playCardToMiddle();
@@ -65,7 +65,7 @@ function handlePlayer2Turn() {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player1.hand.length === 0) {
-    console.log('hi');
+    console.log('Two');
     currentGame.survivalPlayerTurn();
   } else {
     currentGame.playCardToMiddle();
@@ -90,8 +90,15 @@ function handleSlapOutcome(event) {
   var currentCard = currentGame.centerPile[0].number;
   if (currentCard === 11 || currentCard === currentGame.centerPile[1].number || currentCard === currentGame.centerPile[2].number) {
     handleLegalSlap(event)
+  } else {
+    handleBadSlap(event)
   }
 }
+
+function handleBadSlap(event) {
+  currentGame.badSlap(event);
+}
+
 
 function handleLegalSlap(event) {
   currentGame.legalSlap(event);
