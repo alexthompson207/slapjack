@@ -108,11 +108,26 @@ function handleBadSlap(event) {
 }
 
 
-function handleLegalSlapPlayer1(event) {
-  if(currentGame.player1.hand > 0 && currentGame.player2.hand === 0) {
-    currentGame.gameEndSlap();
-  } else if (currentGame.player1.hand === 0) {
-    currentGame.legalSlap(event);
+// 1. When a Jack is revealed, the player who is out of cards can slap it.
+// The central pile is then their new hand, the game continues as normal. CHECK
+//
+// 2. If however, the player who is out of cards slaps something that is not a Jack,
+// or if the player who still has cards slaps the Jack first, then the player who is
+// out of cards loses and the game is over!
+//
+// 3. Doubles and Sandwiches are not valid when one player is completely out of cards -
+// in this case, only a Jack can save them!
+//
+// 4. The only way the player who still has cards can win is by slapping the Jack before
+// the player without cards left does
+
+function handleSurvivalRoundSlap(event, currentCard) {
+  if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
+    legalSlap();
+  } else if ((event.key === 'f' && currentCard !== 11) || (event.key === 'j' && currentCard !== 11)) {
+    //illegal slap
+  } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0)) {
+    //win
   }
 }
 
