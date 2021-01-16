@@ -33,7 +33,7 @@ function handlePlayerEvents(event) {
   if (event.key === "q" && currentGame.player1.currentPlayer && currentGame.player1.hand.length > 0) {
     handlePlayer1Turn();
   } else if (event.key === "p" && currentGame.player2.currentPlayer && currentGame.player2.hand.length > 0) {
-    handlePlayerTurn();
+    handlePlayer2Turn();
   } else if (event.key === 'f') {
     //player1 slaps
     handleSlapOutcome(event)
@@ -59,20 +59,32 @@ function handlePlayer1Turn() {
   }
 }
 
-function handlePlayerTurn() {
+function handlePlayer2Turn() {
   // for later both players hands equal 0 restart game
-  if ((currentGame.player1.hand.length === 1 && currentGame.player2.hand.length === 0) || (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0)) {
+  if (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0) {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
-    console.log('bye');
-  } else if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
-    currentGame.survivalPlayerTurn();
+  } else if (currentGame.player1.hand.length === 0) {
     console.log('hi');
-
+    currentGame.survivalPlayerTurn();
   } else {
     currentGame.playCardToMiddle();
   }
 }
+
+// function handlePlayerTurn() {
+//   // for later both players hands equal 0 restart game
+//   if ((currentGame.player1.hand.length === 1 && currentGame.player2.hand.length === 0) || (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0)) {
+//     currentGame.playCardToMiddle();
+//     currentGame.survivalShuffle();
+//     console.log('bye');
+//   } else if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
+//     currentGame.survivalPlayerTurn();
+//     console.log('hi');
+//   } else {
+//     currentGame.playCardToMiddle();
+//   }
+// }
 
 function handleSlapOutcome(event) {
   var currentCard = currentGame.centerPile[0].number;
