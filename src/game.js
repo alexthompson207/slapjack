@@ -76,6 +76,7 @@ class Game {
    this.player1.hand = this.deck.slice(0, 26);
    this.player2.hand = this.deck.slice(26, 52);
    this.deck = [];
+   this.player1.currentPlayer = true;
  }
 
  playerTurn() {

@@ -39,3 +39,7 @@
 .player-two-wins {
   text-align: center;
 }
+
+.hidden {
+  visibility: hidden;
+}

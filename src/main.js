@@ -42,6 +42,7 @@ function handlePlayerEvents(event) {
     handleSlapOutcome(event)
   }
   displayCenterPile();
+  displayPlayerDeck();
   // currentGame.survivalPlayerTurn();
 
 }
@@ -133,6 +134,20 @@ function handleSurvivalRoundSlap(event, currentCard) {
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     currentGame.badSlap(event);
     console.log('BAD SLAPPER');
+  }
+}
+
+function displayPlayerDeck() {
+  var playerOneDeck = document.querySelector('.one');
+  var playerTwoDeck = document.querySelector('.two');
+  var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
+  var deckDOM = [playerOneDeck, playerTwoDeck];
+  for (var i = 0; i < gameDecks.length; i++) {
+    if(gameDecks[i].length === 0) {
+      deckDOM[i].classList.add('hidden');
+    } else {
+      deckDOM[i].classList.remove('hidden');
+    }
   }
 }
 
