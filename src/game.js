@@ -79,45 +79,45 @@ class Game {
  }
 
  playerTurn() {
-   if (this.player1.currentPlayer && this.player2.hand.length > 0) {
+   if (this.player1.currentPlayer && this.player1.hand.length > 0 && this.player2.hand.length > 0) {
      this.player1.currentPlayer = false;
      this.player2.currentPlayer = true;
-   } else if (this.player2.currentPlayer && this.player1.hand.length > 0) {
+   } else if (this.player2.currentPlayer && this.player1.hand.length > 0 && this.player2.hand.length > 0) {
      this.player1.currentPlayer = true;
      this.player2.currentPlayer = false;
    }
  }
 
- // playCardToMiddle(player) {
- //   if (this[player].currentPlayer) {
- //     this.centerPile.unshift(this[player].hand[0]);
- //     this[player].playCard();
- //     this.playerTurn();
- //   }
- // }
-
-
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
-     this.centerPile.unshift(this.player1.hand[0]);
+     // this.centerPile.unshift(this.player1.hand[0]);
      this.player1.playCard();
      this.playerTurn();
    } else if (this.player2.currentPlayer) {
-     this.centerPile.unshift(this.player2.hand[0]);
+     // this.centerPile.unshift(this.player2.hand[0]);
      this.player2.playCard();
      this.playerTurn();
    }
  }
 
- legalSlap(event) {
-   if (event.key === "f") {
-     this.player1.hand = this.player1.hand.concat(this.centerPile);
+ legalSlap(player) {
+   var topCard = this.centerPile[0];
+   var secondCard = this.centerPile[1];
+   var thirdCard = this.centerPile[2];
+   if (topCard.number === 11) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
      this.centerPile = [];
-     this.shuffleCards(this.player1.hand);
-   } else if (event.key === "j") {
-     this.player2.hand = this.player2.hand.concat(this.centerPile);
+     this.shuffleCards(this[player].hand);
+   } else if (topCard.number === secondCard.number) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
      this.centerPile = [];
-     this.shuffleCards(this.player2.hand);
+     this.shuffleCards(this[player].hand);
+   } else if (topCard.number === thirdCard.number) {
+     this[player].hand = this[player].hand.concat(this.centerPile);
+     this.centerPile = [];
+     this.shuffleCards(this[player].hand);
+   // } else {
+   //   badSlap();
    }
  }
 
@@ -127,30 +127,23 @@ class Game {
  //   this.shuffleCards(this[player].hand);
  // }
 
-
-  badSlap(event) {
-    if (event.key === "f") {
-      this.player2.hand.push(this.player1.hand[0]);
-      this.player1.hand.shift();
-    } else if (event.key === "j") {
-      this.player1.hand.push(this.player2.hand[0]);
-      this.player2.hand.shift();
-    }
+  badSlap() {
+    //player 1 bad slap --make dynamic!! use id?
+    this.player2.hand.push(this.player1.hand[0]);
+    this.player1.hand.shift();
   }
 
   survivalPlayerTurn() {
-    if (this.player1.hand.length === 0) {
+    if (this.player1.currentPlayer && this.player1.hand.length === 0) {
       this.player1.currentPlayer = false;
       this.player2.currentPlayer = true;
-    } else if (this.player2.hand.length === 0) {
+    } else if (this.player2.currentPlayer && this.player2.hand.length === 0) {
       this.player1.currentPlayer = true;
       this.player2.currentPlayer = false;
     }
-    this.playCardToMiddle();
   }
 
   survivalShuffle() {
-    // this.playCardToMiddle();
     if(this.player1.currentPlayer) {
       this.player1.hand = this.centerPile;
       this.centerPile = [];
