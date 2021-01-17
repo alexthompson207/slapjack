@@ -58,6 +58,7 @@ function handlePlayer1Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
+  gameMessage.innerText = '';
 }
 
 function handlePlayer2Turn() {
@@ -71,6 +72,7 @@ function handlePlayer2Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
+  gameMessage.innerText = '';
 }
 
 // function handlePlayerTurn() {
@@ -140,12 +142,9 @@ function handleSurvivalRoundSlap(event, currentCard) {
 }
 
 function displayGameUpdate(currentCard, event) {
+  gameMessage.innerText = '';
   if(currentCard === 11 && event.key === 'f' ) {
     gameMessage.innerText = `SLAPJACK! Player1 takes the pile!`;
-  // } else if (outcome === double) {
-  //   gameMessage = 'DOUBLE! ${player} takes the pile!';
-  // } else if (outcome === sandwich) {
-  //   gameMessage = 'SANDWICH! ${player} takes the pile';
 } else if (currentCard === 11 && event.key === 'j' ) {
   gameMessage.innerText = `SLAPJACK! Player2 takes the pile!`;
 }
