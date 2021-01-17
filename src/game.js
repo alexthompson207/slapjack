@@ -183,4 +183,6 @@ class Game {
     this.player2.hand = [];
 
   }
+
+
 }
