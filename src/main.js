@@ -128,9 +128,11 @@ function handleBadSlap(event) {
 
 function handleSurvivalRoundSlap(event, currentCard) {
   if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
+    displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
     console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
+    displayGameWinSlapUpdate(event);
     currentGame.gameEndSlap();
     console.log('WINNER');
     console.log(currentGame);
@@ -165,6 +167,15 @@ function displayBadSlapUpdate(event) {
     gameMessage.innerText = `BAD SLAP! Player 1 forfeits a card to Player 2!`;
   } else if (event.key === 'j' ) {
   gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
+  }
+}
+
+function displayGameWinSlapUpdate(event) {
+  gameMessage.innerText = '';
+  if(currentGame.player2.hand.length === 0) {
+    gameMessage.innerText = `Player 1 WINS!`;
+  } else if (currentGame.player1.hand.length === 0) {
+  gameMessage.innerText = `Player 2 WINS!`;
   }
 }
 
