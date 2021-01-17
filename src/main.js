@@ -1,7 +1,7 @@
 var game;
 
-var playerOneDeck = document.querySelector('.player-one-deck');
-var playerTwoDeck = document.querySelector('.player-two-deck');
+// var playerOneDeck = document.querySelector('.player-one-deck');
+// var playerTwoDeck = document.querySelector('.player-two-deck');
 var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
@@ -93,6 +93,7 @@ function handleSlapOutcome(event) {
     handleSurvivalRoundSlap(event, currentCard);
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
     currentGame.legalSlap(event);
+    console.log(currentCard);
     console.log('SLAPPER!!');
   } else {
     handleBadSlap(event);
@@ -134,6 +135,16 @@ function handleSurvivalRoundSlap(event, currentCard) {
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     currentGame.badSlap(event);
     console.log('BAD SLAPPER');
+  }
+}
+
+function displayGameUpdate(outcome) {
+  if(outcome === 'slapjack') {
+    gameMessage.innerText = 'SLAPJACK! ${player} takes the pile!';
+  } else if (outcome === double) {
+    gameMessage = 'DOUBLE! ${player} takes the pile!';
+  } else if (outcome === sandwich) {
+    gameMessage = 'SANDWICH! ${player} takes the pile';
   }
 }
 
