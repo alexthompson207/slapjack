@@ -94,10 +94,10 @@ function handleSlapOutcome(event) {
   if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
     handleSurvivalRoundSlap(event, currentCard);
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
+    displayGameUpdate(currentCard, event)
     currentGame.legalSlap(event);
     console.log(currentGame);
     console.log('SLAPPER!!');
-    displayGameUpdate(currentCard, event)
   } else {
     handleBadSlap(event);
     console.log('BAD SLAP');
@@ -144,10 +144,18 @@ function handleSurvivalRoundSlap(event, currentCard) {
 function displayGameUpdate(currentCard, event) {
   gameMessage.innerText = '';
   if(currentCard === 11 && event.key === 'f' ) {
-    gameMessage.innerText = `SLAPJACK! Player1 takes the pile!`;
-} else if (currentCard === 11 && event.key === 'j' ) {
-  gameMessage.innerText = `SLAPJACK! Player2 takes the pile!`;
-}
+    gameMessage.innerText = `SLAPJACK! Player 1 takes the pile!`;
+  } else if (currentCard === 11 && event.key === 'j' ) {
+  gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'f' ) {
+  gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'j' ) {
+  gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
+  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
+  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  }
 }
 
 function displayPlayerDeck() {
