@@ -76,6 +76,7 @@ class Game {
    this.player1.hand = this.deck.slice(0, 26);
    this.player2.hand = this.deck.slice(26, 52);
    this.deck = [];
+   this.player1.currentPlayer = true;
  }
 
  playerTurn() {
@@ -115,13 +116,13 @@ class Game {
      this.centerPile = [];
      this.shuffleCards(this.player1.hand);
      this.player1.currentPlayer = false;
-     this.player2.currentPalyer = true;
+     this.player2.currentPlayer = true;
    } else if (event.key === "j") {
      this.player2.hand = this.player2.hand.concat(this.centerPile);
      this.centerPile = [];
      this.shuffleCards(this.player2.hand);
      this.player1.currentPlayer = true;
-     this.player2.currentPalyer = false;
+     this.player2.currentPlayer = false;
    }
  }
 
@@ -176,8 +177,7 @@ class Game {
 
   resetDeck() {
     this.deck = this.centerPile;
-    this.deck = this.deck.concat(this.player1.hand);
-    this.deck = this.deck.concat(this.player1.hand);
+    this.deck = this.deck.concat(this.player1.hand, this.player2.hand);
     this.centerPile = [];
     this.player1.hand = [];
     this.player2.hand = [];

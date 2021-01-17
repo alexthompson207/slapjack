@@ -3,7 +3,7 @@ class Player {
     this.wins = 0;
     this.hand = [];
     this.id = id;
-    this.currentPlayer = true;
+    this.currentPlayer = false;
   }
 
   playCard() {
@@ -13,6 +13,5 @@ class Player {
   }
 
   saveWinsToStorage() {
-
   }
 }

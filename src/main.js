@@ -1,7 +1,7 @@
 var game;
 
-var playerOneDeck = document.querySelector('.player-one-deck');
-var playerTwoDeck = document.querySelector('.player-two-deck');
+// var playerOneDeck = document.querySelector('.player-one-deck');
+// var playerTwoDeck = document.querySelector('.player-two-deck');
 var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
@@ -42,6 +42,7 @@ function handlePlayerEvents(event) {
     handleSlapOutcome(event)
   }
   displayCenterPile();
+  displayPlayerDeck();
   // currentGame.survivalPlayerTurn();
 
 }
@@ -57,6 +58,7 @@ function handlePlayer1Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
+  gameMessage.innerText = '';
 }
 
 function handlePlayer2Turn() {
@@ -70,6 +72,7 @@ function handlePlayer2Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
+  gameMessage.innerText = '';
 }
 
 // function handlePlayerTurn() {
@@ -91,7 +94,9 @@ function handleSlapOutcome(event) {
   if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
     handleSurvivalRoundSlap(event, currentCard);
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
+    displayGameUpdate(currentCard, event)
     currentGame.legalSlap(event);
+    console.log(currentGame);
     console.log('SLAPPER!!');
   } else {
     handleBadSlap(event);
@@ -133,6 +138,37 @@ function handleSurvivalRoundSlap(event, currentCard) {
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     currentGame.badSlap(event);
     console.log('BAD SLAPPER');
+  }
+}
+
+function displayGameUpdate(currentCard, event) {
+  gameMessage.innerText = '';
+  if(currentCard === 11 && event.key === 'f' ) {
+    gameMessage.innerText = `SLAPJACK! Player 1 takes the pile!`;
+  } else if (currentCard === 11 && event.key === 'j' ) {
+  gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'f' ) {
+  gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'j' ) {
+  gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
+  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
+  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  }
+}
+
+function displayPlayerDeck() {
+  var playerOneDeck = document.querySelector('.one');
+  var playerTwoDeck = document.querySelector('.two');
+  var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
+  var deckDOM = [playerOneDeck, playerTwoDeck];
+  for (var i = 0; i < gameDecks.length; i++) {
+    if(gameDecks[i].length === 0) {
+      deckDOM[i].classList.add('hidden');
+    } else {
+      deckDOM[i].classList.remove('hidden');
+    }
   }
 }
 

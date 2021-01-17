@@ -26,6 +26,11 @@
   padding-top: 2%;
 }
 
+.game-update {
+  display: flex;
+  justify-content: center;
+}
+
 .game-view {
   display: flex;
   justify-content: space-around;
@@ -38,4 +43,8 @@
 .player-one-wins,
 .player-two-wins {
   text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
 }
