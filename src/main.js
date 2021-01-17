@@ -107,7 +107,6 @@ function handleBadSlap(event) {
   currentGame.badSlap(event);
 }
 
-
 // 1. When a Jack is revealed, the player who is out of cards can slap it.
 // The central pile is then their new hand, the game continues as normal. CHECK
 //

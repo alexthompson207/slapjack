@@ -131,7 +131,6 @@ class Game {
  //   this.shuffleCards(this[player].hand);
  // }
 
-
   badSlap(event) {
     if (event.key === "f") {
       this.player2.hand.push(this.player1.hand[0]);
