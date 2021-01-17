@@ -89,7 +89,7 @@ function handlePlayer2Turn() {
 function handleSlapOutcome(event) {
   var currentCard = currentGame.centerPile[0].number;
   if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
-    //survivalRoundSlap
+    handleSurvivalRoundSlap(event, currentCard);
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
     currentGame.legalSlap(event);
     console.log('SLAPPER!!');
@@ -123,11 +123,16 @@ function handleBadSlap(event) {
 
 function handleSurvivalRoundSlap(event, currentCard) {
   if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
-    legalSlap();
-  } else if ((event.key === 'f' && currentCard !== 11) || (event.key === 'j' && currentCard !== 11)) {
-    //illegal slap
-  } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0)) {
-    //win
+    currentGame.legalSlap(event);
+    console.log('SLAP');
+  } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
+    currentGame.gameEndSlap();
+    console.log('WINNER');
+    console.log(currentGame);
+    // currentGame.resetDeck();
+  } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
+    currentGame.badSlap(event);
+    console.log('BAD SLAPPER');
   }
 }
 

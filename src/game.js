@@ -114,10 +114,14 @@ class Game {
      this.player1.hand = this.player1.hand.concat(this.centerPile);
      this.centerPile = [];
      this.shuffleCards(this.player1.hand);
+     this.player1.currentPlayer = false;
+     this.player2.currentPalyer = true;
    } else if (event.key === "j") {
      this.player2.hand = this.player2.hand.concat(this.centerPile);
      this.centerPile = [];
      this.shuffleCards(this.player2.hand);
+     this.player1.currentPlayer = true;
+     this.player2.currentPalyer = false;
    }
  }
 
