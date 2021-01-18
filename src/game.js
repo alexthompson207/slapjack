@@ -153,8 +153,10 @@ class Game {
   gameEndSlap() {
     if (this.player1.hand.length === 0) {
       this.player2.wins++;
+      this.player2.saveWinsToStorage();
     } else if (this.player2.hand.length === 0) {
       this.player1.wins++;
+      this.player1.saveWinsToStorage();
     }
   }
 
