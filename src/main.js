@@ -1,21 +1,19 @@
-var game;
+var currentGame;
 
-// var playerOneDeck = document.querySelector('.player-one-deck');
-// var playerTwoDeck = document.querySelector('.player-two-deck');
 var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
 window.addEventListener('keydown', handlePlayerEvents)
-//keys player1 deal: q
-//keys player1 deal: p
-//handle keys if event type = f or j do handleSlap
 
-//slap f and j
-//handleSlap
-
-function startNewGame() {
-  currentGame = new Game();
+function startNewGame(event, player1, player2) {
+  console.log(player1);
+  if(!player1 && !player2) {
+    currentGame = new Game({ id: 'player1', wins: 0 }, { id: 'player2', wins: 0 });
+    console.log(currentGame);
+  } else {
+  currentGame = new Game(player1, player2);
+  }
   currentGame.dealDeck();
   resetCenterPile();
 }
@@ -26,16 +24,12 @@ function handlePlayerEvents(event) {
   } else if (event.key === "p" && currentGame.player2.currentPlayer && currentGame.player2.hand.length > 0) {
     handlePlayer2Turn();
   } else if (event.key === 'f') {
-    //player1 slaps
-    handleSlapOutcome(event)
+    handleSlapOutcome(event);
   } else if (event.key === 'j') {
-    //player2 slaps
-    handleSlapOutcome(event)
+    handleSlapOutcome(event);
   }
   displayCenterPile();
   displayPlayerDeck();
-  // currentGame.survivalPlayerTurn();
-
 }
 
 function handlePlayer1Turn() {
@@ -66,20 +60,6 @@ function handlePlayer2Turn() {
   gameMessage.innerText = '';
 }
 
-// function handlePlayerTurn() {
-//   // for later both players hands equal 0 restart game
-//   if ((currentGame.player1.hand.length === 1 && currentGame.player2.hand.length === 0) || (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0)) {
-//     currentGame.playCardToMiddle();
-//     currentGame.survivalShuffle();
-//     console.log('bye');
-//   } else if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
-//     currentGame.survivalPlayerTurn();
-//     console.log('hi');
-//   } else {
-//     currentGame.playCardToMiddle();
-//   }
-// }
-
 function handleSlapOutcome(event) {
   var currentCard = currentGame.centerPile[0].number;
   if (currentGame.player1.hand.length === 0 || currentGame.player2.hand.length === 0) {
@@ -95,10 +75,6 @@ function handleSlapOutcome(event) {
   }
 }
 
-// if (currentCard === 11 || currentCard === currentGame.centerPile[1].number || currentCard === currentGame.centerPile[2].number) {
-//   handleLegalSlap(event)
-// }
-
 function handleBadSlap(event) {
   currentGame.badSlap(event);
 }
@@ -110,11 +86,9 @@ function handleSurvivalRoundSlap(event, currentCard) {
     console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
     currentGame.gameEndSlap();
+    displayPlayerWinCount();
     displayGameWinSlapUpdate(event);
     console.log('WINNER');
-    console.log(currentGame);
-    return;
-    // currentGame.resetDeck();
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
     currentGame.badSlap(event);
@@ -135,7 +109,7 @@ function displayLegalSlapUpdate(currentCard, event) {
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
   gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
-  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
   }
 }
 
@@ -148,15 +122,14 @@ function displayBadSlapUpdate(event) {
   }
 }
 
-function displayGameWinSlapUpdate() {
+function displayGameWinSlapUpdate(event) {
   gameMessage.innerText = '';
   if(currentGame.player2.hand.length === 0) {
     gameMessage.innerText = `Player 1 WINS!`;
   } else if (currentGame.player1.hand.length === 0) {
   gameMessage.innerText = `Player 2 WINS!`;
   }
-  displayPlayerWinCount();
-  displayGameWinner();
+  displayGameWinner(event);
 }
 
 function displayPlayerDeck() {
@@ -188,16 +161,24 @@ function displayPlayerWinCount() {
   player2WinCount.innerText = `${currentGame.player2.wins} Wins`;
 }
 
-function displayGameWinner() {
+function displayGameWinner(event) {
+  window.addEventListener('keydown', stop)
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
+  console.log('TIME');
 }
 
 
-function resetGameAfterWin() {
+function resetGameAfterWin(event) {
   currentGame.resetDeck();
-  startNewGame();
+  startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
   gameMessage.innerText = '';
+}
+
+function stop(event) {
+  if(event.key === 'f' || event.key === 'j')
+  event.preventDefault();
+  event.stopPropagation();
 }
 
 function resetCenterPile() {
