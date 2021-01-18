@@ -20,15 +20,6 @@ function startNewGame() {
   resetCenterPile();
 }
 
-// function handlePlayerEvents(event) {
-//   if (event.key === 'q' || event.key === 'p') {
-//     playerDealsACard();
-//   }
-//   displayCenterPile();
-// }
-
-
-
 function handlePlayerEvents(event) {
   if (event.key === "q" && currentGame.player1.currentPlayer && currentGame.player1.hand.length > 0) {
     handlePlayer1Turn();
@@ -112,30 +103,17 @@ function handleBadSlap(event) {
   currentGame.badSlap(event);
 }
 
-
-// 1. When a Jack is revealed, the player who is out of cards can slap it.
-// The central pile is then their new hand, the game continues as normal. CHECK
-//
-// 2. If however, the player who is out of cards slaps something that is not a Jack,
-// or if the player who still has cards slaps the Jack first, then the player who is
-// out of cards loses and the game is over!
-//
-// 3. Doubles and Sandwiches are not valid when one player is completely out of cards -
-// in this case, only a Jack can save them!
-//
-// 4. The only way the player who still has cards can win is by slapping the Jack before
-// the player without cards left does
-
 function handleSurvivalRoundSlap(event, currentCard) {
   if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
     displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
     console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
-    displayGameWinSlapUpdate(event);
     currentGame.gameEndSlap();
+    displayGameWinSlapUpdate(event);
     console.log('WINNER');
     console.log(currentGame);
+    return;
     // currentGame.resetDeck();
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
@@ -163,20 +141,22 @@ function displayLegalSlapUpdate(currentCard, event) {
 
 function displayBadSlapUpdate(event) {
   gameMessage.innerText = '';
-  if(event.key === 'f' ) {
+  if(event.key === 'f') {
     gameMessage.innerText = `BAD SLAP! Player 1 forfeits a card to Player 2!`;
-  } else if (event.key === 'j' ) {
+  } else if (event.key === 'j') {
   gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
   }
 }
 
-function displayGameWinSlapUpdate(event) {
+function displayGameWinSlapUpdate() {
   gameMessage.innerText = '';
   if(currentGame.player2.hand.length === 0) {
     gameMessage.innerText = `Player 1 WINS!`;
   } else if (currentGame.player1.hand.length === 0) {
   gameMessage.innerText = `Player 2 WINS!`;
   }
+  displayPlayerWinCount();
+  displayGameWinner();
 }
 
 function displayPlayerDeck() {
@@ -199,6 +179,25 @@ function displayCenterPile() {
     var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card cards">`;
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
   }
+}
+
+function displayPlayerWinCount() {
+  var player1WinCount = document.querySelector('.player-one-wins');
+  var player2WinCount = document.querySelector('.player-two-wins');
+  player1WinCount.innerText = `${currentGame.player1.wins} Wins`;
+  player2WinCount.innerText = `${currentGame.player2.wins} Wins`;
+}
+
+function displayGameWinner() {
+  var pausedGame = setTimeout (resetGameAfterWin, 2000);
+}
+
+
+function resetGameAfterWin() {
+  currentGame.resetDeck();
+  startNewGame();
+  displayPlayerDeck();
+  gameMessage.innerText = '';
 }
 
 function resetCenterPile() {
