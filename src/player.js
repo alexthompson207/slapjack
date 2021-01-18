@@ -8,7 +8,6 @@ class Player {
 
   playCard() {
     console.log(this);
-    // game.centerPile.unshift(this.hand[0]);
     this.hand.shift();
   }
 

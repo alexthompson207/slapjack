@@ -16,7 +16,7 @@ window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
   currentGame = new Game();
-  displayPlayerWinCount();
+  // displayPlayerWinCount();
   currentGame.dealDeck();
   resetCenterPile();
 }
@@ -112,6 +112,7 @@ function handleSurvivalRoundSlap(event, currentCard) {
     console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
     currentGame.gameEndSlap();
+    displayPlayerWinCount();
     displayGameWinSlapUpdate(event);
     console.log('WINNER');
     console.log(currentGame);
@@ -156,7 +157,6 @@ function displayGameWinSlapUpdate() {
   } else if (currentGame.player1.hand.length === 0) {
   gameMessage.innerText = `Player 2 WINS!`;
   }
-  displayPlayerWinCount();
   displayGameWinner();
 }
 
@@ -191,6 +191,7 @@ function displayPlayerWinCount() {
 
 function displayGameWinner() {
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
+  console.log('TIME');
 }
 
 
