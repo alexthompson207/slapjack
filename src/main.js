@@ -7,14 +7,12 @@ window.addEventListener('load', startNewGame);
 window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
-  // console.log(player1);
-  if(!currentGame) {
+  if (!currentGame) {
     currentGame = new Game();
-  } else {
-  currentGame = new Game();
   }
   currentGame.dealDeck();
   resetCenterPile();
+  displayPlayerWinCount();
 }
 
 function handlePlayerEvents(event) {
@@ -152,6 +150,12 @@ function displayCenterPile() {
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
   }
 }
+
+// function getWinsFromStorage() {
+//   var storedPlayer1Wins = JSON.parse(localStorage.getItem('player1'));
+//   var storedPlayer2Wins = JSON.parse(localStorage.getItem('player2'));
+//   displayPlayerWinCount();
+// }
 
 function displayPlayerWinCount() {
   var player1WinCount = document.querySelector('.player-one-wins');

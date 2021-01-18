@@ -1,8 +1,8 @@
 class Player {
   constructor(id) {
-    this.wins = JSON.parse(localStorage.getItem(`${this.id}`)) || 0;
-    this.hand = [];
     this.id = id;
+    this.wins = JSON.parse(localStorage.getItem(`${this.id}`));
+    this.hand = [];
     this.currentPlayer = false;
   }
 
