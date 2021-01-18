@@ -6,16 +6,13 @@ var gameMessage = document.querySelector('.game-update');
 window.addEventListener('load', startNewGame);
 window.addEventListener('keydown', handlePlayerEvents)
 
-function startNewGame(event, player1, player2) {
-  console.log(player1);
-  if(!player1 && !player2) {
-    currentGame = new Game({ id: 'player1', wins: 0 }, { id: 'player2', wins: 0 });
-    console.log(currentGame);
-  } else {
-  currentGame = new Game(player1, player2);
+function startNewGame() {
+  if (!currentGame) {
+    currentGame = new Game();
   }
   currentGame.dealDeck();
   resetCenterPile();
+  displayPlayerWinCount();
 }
 
 function handlePlayerEvents(event) {
@@ -153,6 +150,7 @@ function displayCenterPile() {
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
   }
 }
+
 
 function displayPlayerWinCount() {
   var player1WinCount = document.querySelector('.player-one-wins');
