@@ -16,6 +16,7 @@ window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
   currentGame = new Game();
+  displayPlayerWinCount();
   currentGame.dealDeck();
   resetCenterPile();
 }
@@ -27,13 +28,14 @@ function handlePlayerEvents(event) {
     handlePlayer2Turn();
   } else if (event.key === 'f') {
     //player1 slaps
-    handleSlapOutcome(event)
+    handleSlapOutcome(event);
   } else if (event.key === 'j') {
     //player2 slaps
-    handleSlapOutcome(event)
+    handleSlapOutcome(event);
   }
   displayCenterPile();
   displayPlayerDeck();
+  // displayPlayerWinCount();
   // currentGame.survivalPlayerTurn();
 
 }
@@ -113,7 +115,6 @@ function handleSurvivalRoundSlap(event, currentCard) {
     displayGameWinSlapUpdate(event);
     console.log('WINNER');
     console.log(currentGame);
-    return;
     // currentGame.resetDeck();
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
@@ -135,7 +136,7 @@ function displayLegalSlapUpdate(currentCard, event) {
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
   gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
-  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+  gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
   }
 }
 
