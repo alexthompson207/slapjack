@@ -4,12 +4,13 @@ var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
-window.addEventListener('keydown', handlePlayerEvents)
+// window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
   if (!currentGame) {
     currentGame = new Game();
   }
+  window.addEventListener('keydown', handlePlayerEvents);
   currentGame.dealDeck();
   resetCenterPile();
   displayPlayerWinCount();
@@ -160,23 +161,15 @@ function displayPlayerWinCount() {
 }
 
 function displayGameWinner(event) {
-  window.addEventListener('keydown', stop)
+  window.removeEventListener('keydown', handlePlayerEvents);
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
-  console.log('TIME');
 }
-
 
 function resetGameAfterWin(event) {
   currentGame.resetDeck();
   startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
   gameMessage.innerText = '';
-}
-
-function stop(event) {
-  if(event.key === 'f' || event.key === 'j')
-  event.preventDefault();
-  event.stopPropagation();
 }
 
 function resetCenterPile() {
