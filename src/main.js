@@ -6,13 +6,12 @@ var gameMessage = document.querySelector('.game-update');
 window.addEventListener('load', startNewGame);
 window.addEventListener('keydown', handlePlayerEvents)
 
-function startNewGame(event, player1, player2) {
-  console.log(player1);
-  if(!player1 && !player2) {
-    currentGame = new Game({ id: 'player1', wins: 0 }, { id: 'player2', wins: 0 });
-    console.log(currentGame);
+function startNewGame() {
+  // console.log(player1);
+  if(!currentGame) {
+    currentGame = new Game();
   } else {
-  currentGame = new Game(player1, player2);
+  currentGame = new Game();
   }
   currentGame.dealDeck();
   resetCenterPile();

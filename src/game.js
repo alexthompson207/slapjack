@@ -1,7 +1,7 @@
 class Game {
-  constructor(player1, player2) {
-    this.player1 = new Player(player1.id, player1.wins);
-    this.player2 = new Player(player2.id, player2.wins);
+  constructor() {
+    this.player1 = new Player('player1');
+    this.player2 = new Player('player2');
     this.centerPile = [];
     this.deck = [
       { src: "./assets/blue-01.png", number: 1 },
