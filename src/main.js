@@ -151,11 +151,6 @@ function displayCenterPile() {
   }
 }
 
-// function getWinsFromStorage() {
-//   var storedPlayer1Wins = JSON.parse(localStorage.getItem('player1'));
-//   var storedPlayer2Wins = JSON.parse(localStorage.getItem('player2'));
-//   displayPlayerWinCount();
-// }
 
 function displayPlayerWinCount() {
   var player1WinCount = document.querySelector('.player-one-wins');
