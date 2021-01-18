@@ -89,8 +89,6 @@ function handleSurvivalRoundSlap(event, currentCard) {
     displayPlayerWinCount();
     displayGameWinSlapUpdate(event);
     console.log('WINNER');
-    console.log(currentGame);
-    // currentGame.resetDeck();
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
     currentGame.badSlap(event);
@@ -164,7 +162,7 @@ function displayPlayerWinCount() {
 }
 
 function displayGameWinner(event) {
-
+  window.addEventListener('keydown', stop)
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
   console.log('TIME');
 }
@@ -175,6 +173,12 @@ function resetGameAfterWin(event) {
   startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
   gameMessage.innerText = '';
+}
+
+function stop(event) {
+  if(event.key === 'f' || event.key === 'j')
+  event.preventDefault();
+  event.stopPropagation();
 }
 
 function resetCenterPile() {
