@@ -1,4 +1,4 @@
-var game;
+var currentGame;
 
 // var playerOneDeck = document.querySelector('.player-one-deck');
 // var playerTwoDeck = document.querySelector('.player-two-deck');
@@ -7,16 +7,16 @@ var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
 window.addEventListener('keydown', handlePlayerEvents)
-//keys player1 deal: q
-//keys player1 deal: p
-//handle keys if event type = f or j do handleSlap
 
-//slap f and j
-//handleSlap
 
-function startNewGame() {
-  currentGame = new Game();
-  // displayPlayerWinCount();
+function startNewGame(event, player1, player2) {
+  console.log(player1);
+  if(!player1 && !player2) {
+    currentGame = new Game({ id: 'player1', wins: 0 }, { id: 'player2', wins: 0 });
+    console.log(currentGame);
+  } else {
+  currentGame = new Game(player1, player2);
+  }
   currentGame.dealDeck();
   resetCenterPile();
 }
@@ -150,14 +150,14 @@ function displayBadSlapUpdate(event) {
   }
 }
 
-function displayGameWinSlapUpdate() {
+function displayGameWinSlapUpdate(event) {
   gameMessage.innerText = '';
   if(currentGame.player2.hand.length === 0) {
     gameMessage.innerText = `Player 1 WINS!`;
   } else if (currentGame.player1.hand.length === 0) {
   gameMessage.innerText = `Player 2 WINS!`;
   }
-  displayGameWinner();
+  displayGameWinner(event);
 }
 
 function displayPlayerDeck() {
@@ -189,15 +189,15 @@ function displayPlayerWinCount() {
   player2WinCount.innerText = `${currentGame.player2.wins} Wins`;
 }
 
-function displayGameWinner() {
+function displayGameWinner(event) {
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
   console.log('TIME');
 }
 
 
-function resetGameAfterWin() {
+function resetGameAfterWin(event) {
   currentGame.resetDeck();
-  startNewGame();
+  startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
   gameMessage.innerText = '';
 }
