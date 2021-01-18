@@ -1,6 +1,5 @@
 class Game {
   constructor(player1, player2) {
-
     this.player1 = new Player(player1.id, player1.wins);
     this.player2 = new Player(player2.id, player2.wins);
     this.centerPile = [];
@@ -89,15 +88,6 @@ class Game {
    }
  }
 
- // playCardToMiddle(player) {
- //   if (this[player].currentPlayer) {
- //     this.centerPile.unshift(this[player].hand[0]);
- //     this[player].playCard();
- //     this.playerTurn();
- //   }
- // }
-
-
  playCardToMiddle() {
    if (this.player1.currentPlayer) {
      this.centerPile.unshift(this.player1.hand[0]);
@@ -125,13 +115,6 @@ class Game {
      this.player2.currentPlayer = false;
    }
  }
-
- // winTurn(player) {
- //   this[player].hand = this[player].hand.concat(this.centerPile);
- //   this.centerPile = [];
- //   this.shuffleCards(this[player].hand);
- // }
-
 
   badSlap(event) {
     if (event.key === "f") {
@@ -181,8 +164,6 @@ class Game {
     this.centerPile = [];
     this.player1.hand = [];
     this.player2.hand = [];
-
   }
-
 
 }
