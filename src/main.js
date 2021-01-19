@@ -174,11 +174,15 @@ function resetGameAfterWin(event) {
 
 function changeBackgroundCardColor() {
   var middleCard = document.querySelector('.middle');
-  if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
-    middleCard.classList.add('card-style');
-  } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
+    if (currentGame.player1.hand.length === 0 && currentGame.player2.currentPlayer) {
+      middleCard.classList.add('card-style');
+    } else if (currentGame.player2.hand.length === 0 && currentGame.player1.currentPlayer) {
+      middleCard.classList.remove('card-style');
+    } else if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
+      middleCard.classList.add('card-style');
+    } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
     middleCard.classList.remove('card-style');
-  }
+    }
 }
 
 function resetCenterPile() {
