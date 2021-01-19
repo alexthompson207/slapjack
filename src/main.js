@@ -71,16 +71,13 @@ function handleSurvivalRoundSlap(event, currentCard) {
   if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
     displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
-    console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
     currentGame.gameEndSlap();
     displayPlayerWinCount();
     displayGameWinSlapUpdate(event);
-    console.log('WINNER');
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
     currentGame.badSlap(event);
-    console.log('BAD SLAPPER');
   }
 }
 
