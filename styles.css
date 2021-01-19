@@ -7,8 +7,10 @@
   padding: 0;
 }
 
+/* ---- GAME/UPDATES TEXT ---- */
+
 .main-view {
-  background-color: #966F33;
+  background-color: #F0A714;
   font-family: 'PT Serif', serif;
 }
 
@@ -17,27 +19,13 @@
   text-align: center;
 }
 
-.cards {
-  width: 250px;
-  height: 375px;
-  border-radius: 20px;
-  margin-top: 80px;
-  margin-bottom: 20px;
-  box-shadow: -10px 0 20px #0b6fe7,
-    10px 0 20px #0b6fe7;
-}
-
-.card-style {
-  box-shadow: -10px 0 20px rgb(179,28,181),
-  10px 0 20px rgb(179,28,181);
-}
-
 .title {
   display: flex;
   justify-content: center;
   font-size: 3.6em;
   padding-top: 2%;
   font-weight: bold;
+  color: #000000;
 }
 
 .game-update {
@@ -48,6 +36,22 @@
 .game-view {
   display: flex;
   justify-content: space-around;
+}
+/* ---- CARDS ---- */
+
+.cards {
+  width: 250px;
+  height: 375px;
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  box-shadow: -10px 0 20px #0b6fe7,
+  10px 0 20px #0b6fe7;
+}
+
+.card-style {
+  box-shadow: -10px 0 20px rgb(179,28,181),
+  10px 0 20px rgb(179,28,181);
 }
 
 .control-box {
@@ -60,6 +64,25 @@
 
 .control-directions {
   padding: 2%;
+}
+
+/* ---- RULE VIDEO LINK ---- */
+
+.game-rules {
+  display: flex;
+  justify-content: center;
+}
+
+.rule-video {
+  padding: 2% 1%;
+  font-size: 1.4em;
+  color: #0048F0;
+  font-size: bold;
+}
+
+.rule-video:hover {
+  outline: 2px solid white;
+  background-color: lightsteelblue;
 }
 
 /* ---- HIDDEN ---- */

@@ -7,7 +7,6 @@ class Player {
   }
 
   playCard() {
-    console.log(this);
     this.hand.shift();
   }
 

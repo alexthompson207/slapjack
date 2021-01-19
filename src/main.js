@@ -1,7 +1,7 @@
-var currentGame;
-
 var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
+
+var currentGame;
 
 window.addEventListener('load', startNewGame);
 
@@ -28,12 +28,10 @@ function handlePlayerEvents(event) {
 }
 
 function handlePlayer1Turn() {
-  // for later both players hands equal 0 restart game
   if (currentGame.player1.hand.length === 1 && currentGame.player2.hand.length === 0) {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player2.hand.length === 0) {
-    console.log('One');
     currentGame.survivalPlayerTurn();
     displayCenterPile();
   } else {
@@ -47,7 +45,6 @@ function handlePlayer2Turn() {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player1.hand.length === 0) {
-    console.log('Two');
     currentGame.survivalPlayerTurn();
     displayCenterPile();
   } else {
@@ -63,69 +60,59 @@ function handleSlapOutcome(event) {
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
     displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
-    console.log('SLAPPER!!');
   } else {
     currentGame.badSlap(event);
     displayBadSlapUpdate(event);
-
-    console.log('BAD SLAP');
   }
   displayCenterPile();
-}
-
-function handleBadSlap(event) {
-  currentGame.badSlap(event);
 }
 
 function handleSurvivalRoundSlap(event, currentCard) {
   if ((event.key === 'f' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player2.hand.length === 0)) {
     displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
-    console.log('SLAP');
   } else if ((event.key === 'f' && currentCard === 11 && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentCard === 11 && currentGame.player1.hand.length === 0) || (event.key === 'f' && currentGame.player1.hand.length === 0) || (event.key === 'j' && currentGame.player2.hand.length === 0)) {
     currentGame.gameEndSlap();
     displayPlayerWinCount();
     displayGameWinSlapUpdate(event);
-    console.log('WINNER');
   } else if ((event.key === 'f' && currentGame.player2.hand.length === 0) || (event.key === 'j' && currentGame.player1.hand.length === 0)) {
     displayBadSlapUpdate(event);
     currentGame.badSlap(event);
-    console.log('BAD SLAPPER');
   }
 }
 
 function displayLegalSlapUpdate(currentCard, event) {
   gameMessage.innerText = '';
-  if(currentCard === 11 && event.key === 'f' ) {
+  if (currentCard === 11 && event.key === 'f' ) {
     gameMessage.innerText = `SLAPJACK! Player 1 takes the pile!`;
   } else if (currentCard === 11 && event.key === 'j' ) {
-  gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
+    gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'f' ) {
-  gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
+    gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'j' ) {
-  gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
+    gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
-  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+    gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
-  gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
+    gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
   }
 }
 
 function displayBadSlapUpdate(event) {
   gameMessage.innerText = '';
-  if(event.key === 'f') {
+  if (event.key === 'f') {
     gameMessage.innerText = `BAD SLAP! Player 1 forfeits a card to Player 2!`;
   } else if (event.key === 'j') {
-  gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
+    gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
   }
 }
 
 function displayGameWinSlapUpdate(event) {
   gameMessage.innerText = '';
-  if(currentGame.player2.hand.length === 0) {
+  if (currentGame.player2.hand.length === 0) {
     gameMessage.innerText = `Player 1 WINS!`;
   } else if (currentGame.player1.hand.length === 0) {
-  gameMessage.innerText = `Player 2 WINS!`;
+    gameMessage.innerText = `Player 2 WINS!`;
   }
   displayGameWinner(event);
 }
@@ -136,7 +123,7 @@ function displayPlayerDeck() {
   var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
   var deckDOM = [playerOneDeck, playerTwoDeck];
     for (var i = 0; i < gameDecks.length; i++) {
-      if(gameDecks[i].length === 0) {
+      if (gameDecks[i].length === 0) {
         deckDOM[i].classList.add('hidden');
       } else {
         deckDOM[i].classList.remove('hidden');
@@ -169,7 +156,7 @@ function resetGameAfterWin(event) {
   currentGame.resetDeck();
   startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
-  gameMessage.innerText = '';
+  gameMessage.innerText = 'Player 1 deals first!';
 }
 
 function changeBackgroundCardColor() {
@@ -178,10 +165,10 @@ function changeBackgroundCardColor() {
       middleCard.classList.add('card-style');
     } else if (currentGame.player2.hand.length === 0 && currentGame.player1.currentPlayer) {
       middleCard.classList.remove('card-style');
-    } else if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
+    } else if (currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
       middleCard.classList.add('card-style');
     } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
-    middleCard.classList.remove('card-style');
+      middleCard.classList.remove('card-style');
     }
 }
 
