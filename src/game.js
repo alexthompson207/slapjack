@@ -142,7 +142,7 @@ class Game {
   }
 
   survivalShuffle() {
-    if(this.player1.currentPlayer) {
+    if (this.player1.currentPlayer) {
       this.player1.hand = this.centerPile;
       this.centerPile = [];
       this.shuffleCards(this.player1.hand);
