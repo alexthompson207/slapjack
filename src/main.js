@@ -50,7 +50,7 @@ function handlePlayer2Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
-  // gameMessage.innerText = '';
+  gameMessage.innerText = '';
 }
 
 function handleSlapOutcome(event) {

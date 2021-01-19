@@ -8,7 +8,7 @@
 }
 
 .main-view {
-  background-color: #966F33;
+  background-color: #F0A714;
   font-family: 'PT Serif', serif;
 }
 
@@ -38,6 +38,7 @@
   font-size: 3.6em;
   padding-top: 2%;
   font-weight: bold;
+  color: #000000;
 }
 
 .game-update {
@@ -60,6 +61,25 @@
 
 .control-directions {
   padding: 2%;
+}
+
+/* ---- RULE VIDEO LINK ---- */
+
+.game-rules {
+  display: flex;
+  justify-content: center;
+}
+
+.rule-video {
+  padding: 2% 1%;
+  font-size: 1.4em;
+  color: #0048F0;
+  font-size: bold;
+}
+
+.rule-video:hover {
+  outline: 2px solid white;
+  background-color: lightsteelblue;
 }
 
 /* ---- HIDDEN ---- */
