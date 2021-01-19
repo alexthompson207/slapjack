@@ -23,8 +23,8 @@ function handlePlayerEvents(event) {
   } else if (event.key === 'f' || event.key === 'j') {
     handleSlapOutcome(event);
   }
-  displayCenterPile();
   displayPlayerDeck();
+  displayCenterPile();
 }
 
 function handlePlayer1Turn() {
@@ -35,6 +35,7 @@ function handlePlayer1Turn() {
   } else if (currentGame.player2.hand.length === 0) {
     console.log('One');
     currentGame.survivalPlayerTurn();
+    changeBackgroundCardColor();
   } else {
     currentGame.playCardToMiddle();
   }
@@ -145,6 +146,7 @@ function displayCenterPile() {
   if (currentGame.centerPile.length > 0) {
     var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card middle cards">`;
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
+    changeBackgroundCardColor();
   }
 }
 
@@ -170,9 +172,9 @@ function resetGameAfterWin(event) {
 function changeBackgroundCardColor() {
   var middleCard = document.querySelector('.middle');
   if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
-    middleCard.classList.remove('two');
-  } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
     middleCard.classList.add('two');
+  } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
+    middleCard.classList.remove('two');
   }
 }
 
