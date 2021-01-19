@@ -4,7 +4,6 @@ var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
-// window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
   if (!currentGame) {
@@ -21,9 +20,7 @@ function handlePlayerEvents(event) {
     handlePlayer1Turn();
   } else if (event.key === "p" && currentGame.player2.currentPlayer && currentGame.player2.hand.length > 0) {
     handlePlayer2Turn();
-  } else if (event.key === 'f') {
-    handleSlapOutcome(event);
-  } else if (event.key === 'j') {
+  } else if (event.key === 'f' || event.key === 'j') {
     handleSlapOutcome(event);
   }
   displayCenterPile();
@@ -135,13 +132,13 @@ function displayPlayerDeck() {
   var playerTwoDeck = document.querySelector('.two');
   var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
   var deckDOM = [playerOneDeck, playerTwoDeck];
-  for (var i = 0; i < gameDecks.length; i++) {
-    if(gameDecks[i].length === 0) {
-      deckDOM[i].classList.add('hidden');
-    } else {
-      deckDOM[i].classList.remove('hidden');
+    for (var i = 0; i < gameDecks.length; i++) {
+      if(gameDecks[i].length === 0) {
+        deckDOM[i].classList.add('hidden');
+      } else {
+        deckDOM[i].classList.remove('hidden');
+      }
     }
-  }
 }
 
 function displayCenterPile() {
@@ -151,7 +148,6 @@ function displayCenterPile() {
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
   }
 }
-
 
 function displayPlayerWinCount() {
   var player1WinCount = document.querySelector('.player-one-wins');
