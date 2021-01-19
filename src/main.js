@@ -42,7 +42,6 @@ function handlePlayer1Turn() {
 }
 
 function handlePlayer2Turn() {
-  // for later both players hands equal 0 restart game
   if (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0) {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
@@ -144,7 +143,7 @@ function displayPlayerDeck() {
 function displayCenterPile() {
   resetCenterPile();
   if (currentGame.centerPile.length > 0) {
-    var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card cards">`;
+    var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card middle cards">`;
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
   }
 }
@@ -166,6 +165,15 @@ function resetGameAfterWin(event) {
   startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
   gameMessage.innerText = '';
+}
+
+function changeBackgroundCardColor() {
+  var middleCard = document.querySelector('.middle');
+  if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
+    middleCard.classList.remove('two');
+  } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
+    middleCard.classList.add('two');
+  }
 }
 
 function resetCenterPile() {

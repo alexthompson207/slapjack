@@ -17,6 +17,13 @@
   border-radius: 20px;
   margin-top: 80px;
   margin-bottom: 20px;
+  box-shadow: -10px 0 20px #0b6fe7,
+    10px 0 20px #0b6fe7;
+}
+
+.two {
+  box-shadow: -10px 0 20px rgb(179,28,181),
+  10px 0 20px rgb(179,28,181);
 }
 
 .title {
