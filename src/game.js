@@ -142,7 +142,6 @@ class Game {
   }
 
   survivalShuffle() {
-    // this.playCardToMiddle();
     if(this.player1.currentPlayer) {
       this.player1.hand = this.centerPile;
       this.centerPile = [];

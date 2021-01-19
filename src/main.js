@@ -23,8 +23,8 @@ function handlePlayerEvents(event) {
   } else if (event.key === 'f' || event.key === 'j') {
     handleSlapOutcome(event);
   }
-  displayPlayerDeck();
   displayCenterPile();
+  displayPlayerDeck();
 }
 
 function handlePlayer1Turn() {
@@ -65,11 +65,12 @@ function handleSlapOutcome(event) {
     currentGame.legalSlap(event);
     console.log('SLAPPER!!');
   } else {
-    displayCenterPile();
+    currentGame.badSlap(event);
     displayBadSlapUpdate(event);
-    handleBadSlap(event);
+
     console.log('BAD SLAP');
   }
+  displayCenterPile();
 }
 
 function handleBadSlap(event) {
@@ -174,9 +175,9 @@ function resetGameAfterWin(event) {
 function changeBackgroundCardColor() {
   var middleCard = document.querySelector('.middle');
   if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
-    middleCard.classList.add('two');
+    middleCard.classList.add('card-style');
   } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
-    middleCard.classList.remove('two');
+    middleCard.classList.remove('card-style');
   }
 }
 
