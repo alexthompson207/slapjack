@@ -8,7 +8,13 @@
 }
 
 .main-view {
-  background-color: #8083c9;
+  background-color: #966F33;
+  font-family: 'PT Serif', serif;
+}
+
+.player-one-deck,
+.player-two-deck {
+  text-align: center;
 }
 
 .cards {
@@ -29,8 +35,9 @@
 .title {
   display: flex;
   justify-content: center;
-  font-size: 3.2em;
+  font-size: 3.6em;
   padding-top: 2%;
+  font-weight: bold;
 }
 
 .game-update {
@@ -43,14 +50,19 @@
   justify-content: space-around;
 }
 
-.player-name {
-  text-align: center;
+.control-box {
+  background-color: lightsteelblue;
+  padding: 3%;
+  margin-top: 4%;
+  border-radius: 5px;
+  width: 275px;
 }
 
-.player-one-wins,
-.player-two-wins {
-  text-align: center;
+.control-directions {
+  padding: 2%;
 }
+
+/* ---- HIDDEN ---- */
 
 .hidden {
   visibility: hidden;
