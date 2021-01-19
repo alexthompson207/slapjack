@@ -35,7 +35,7 @@ function handlePlayer1Turn() {
   } else if (currentGame.player2.hand.length === 0) {
     console.log('One');
     currentGame.survivalPlayerTurn();
-    changeBackgroundCardColor();
+    displayCenterPile();
   } else {
     currentGame.playCardToMiddle();
   }
@@ -49,6 +49,7 @@ function handlePlayer2Turn() {
   } else if (currentGame.player1.hand.length === 0) {
     console.log('Two');
     currentGame.survivalPlayerTurn();
+    displayCenterPile();
   } else {
     currentGame.playCardToMiddle();
   }
@@ -64,6 +65,7 @@ function handleSlapOutcome(event) {
     currentGame.legalSlap(event);
     console.log('SLAPPER!!');
   } else {
+    displayCenterPile();
     displayBadSlapUpdate(event);
     handleBadSlap(event);
     console.log('BAD SLAP');

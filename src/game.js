@@ -120,9 +120,13 @@ class Game {
     if (event.key === "f") {
       this.player2.hand.push(this.player1.hand[0]);
       this.player1.hand.shift();
+      this.player1.currentPlayer = false;
+      this.player2.currentPlayer = true;
     } else if (event.key === "j") {
       this.player1.hand.push(this.player2.hand[0]);
       this.player2.hand.shift();
+      this.player1.currentPlayer = true;
+      this.player2.currentPlayer = false;
     }
   }
 
