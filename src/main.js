@@ -156,7 +156,7 @@ function resetGameAfterWin(event) {
   currentGame.resetDeck();
   startNewGame(event, currentGame.player1, currentGame.player2);
   displayPlayerDeck();
-  gameMessage.innerText = '';
+  gameMessage.innerText = 'Player 1 deals first!';
 }
 
 function changeBackgroundCardColor() {
