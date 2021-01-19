@@ -3,26 +3,35 @@
   <head>
     <meta charset="utf-8">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <title>Slapjack</title>
   </head>
   <body class="main-view">
     <h1 class="title">SLAPJACK</h1>
-    <h1 class="game-update"></h1>
+    <h1 class="game-update">Player 1 deals first!</h1>
       <section class="game-view">
         <div class="player-one-deck">
           <img class="cards one" src="./assets/back.png" alt="Player One's Deck">
           <h2 class="player-name">Player 1</h2>
           <h2 class="player-one-wins">0 Wins</h2>
+          <div class="control-box">
+            <h3>Player 1 CONTROLS:</h3>
+            <h4 class="control-directions">Press the [ q ] key to deal a card.</h4>
+            <h4 class="control-directions">Press the [ f ] key to slap!</h4>
+        </div>
         </div>
         <div class="center-deck">
           <img class="cards middle" src="./assets/back.png" alt="Center Deck Pile">
         </div>
         <div class="player-two-deck">
-          <img class="cards two" src="./assets/back.png" alt="Player Two's Deck">
+          <img class="cards two card-style" src="./assets/back.png" alt="Player Two's Deck">
           <h2 class="player-name">Player 2</h2>
           <h2 class="player-two-wins">0 Wins</h2>
+          <div class="control-box">
+            <h3>Player 2 CONTROLS:</h3>
+            <h4 class="control-directions">Press the [ p ] key to deal a card.</h4>
+            <h4 class="control-directions">Press the [ j ] key to slap!</h4>
         </div>
       </section>
   </body>

@@ -4,12 +4,12 @@ var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
 
 window.addEventListener('load', startNewGame);
-window.addEventListener('keydown', handlePlayerEvents)
 
 function startNewGame() {
   if (!currentGame) {
     currentGame = new Game();
   }
+  window.addEventListener('keydown', handlePlayerEvents);
   currentGame.dealDeck();
   resetCenterPile();
   displayPlayerWinCount();
@@ -20,9 +20,7 @@ function handlePlayerEvents(event) {
     handlePlayer1Turn();
   } else if (event.key === "p" && currentGame.player2.currentPlayer && currentGame.player2.hand.length > 0) {
     handlePlayer2Turn();
-  } else if (event.key === 'f') {
-    handleSlapOutcome(event);
-  } else if (event.key === 'j') {
+  } else if (event.key === 'f' || event.key === 'j') {
     handleSlapOutcome(event);
   }
   displayCenterPile();
@@ -37,6 +35,7 @@ function handlePlayer1Turn() {
   } else if (currentGame.player2.hand.length === 0) {
     console.log('One');
     currentGame.survivalPlayerTurn();
+    displayCenterPile();
   } else {
     currentGame.playCardToMiddle();
   }
@@ -44,13 +43,13 @@ function handlePlayer1Turn() {
 }
 
 function handlePlayer2Turn() {
-  // for later both players hands equal 0 restart game
   if (currentGame.player2.hand.length === 1 && currentGame.player1.hand.length === 0) {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player1.hand.length === 0) {
     console.log('Two');
     currentGame.survivalPlayerTurn();
+    displayCenterPile();
   } else {
     currentGame.playCardToMiddle();
   }
@@ -66,10 +65,12 @@ function handleSlapOutcome(event) {
     currentGame.legalSlap(event);
     console.log('SLAPPER!!');
   } else {
+    currentGame.badSlap(event);
     displayBadSlapUpdate(event);
-    handleBadSlap(event);
+
     console.log('BAD SLAP');
   }
+  displayCenterPile();
 }
 
 function handleBadSlap(event) {
@@ -134,23 +135,23 @@ function displayPlayerDeck() {
   var playerTwoDeck = document.querySelector('.two');
   var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
   var deckDOM = [playerOneDeck, playerTwoDeck];
-  for (var i = 0; i < gameDecks.length; i++) {
-    if(gameDecks[i].length === 0) {
-      deckDOM[i].classList.add('hidden');
-    } else {
-      deckDOM[i].classList.remove('hidden');
+    for (var i = 0; i < gameDecks.length; i++) {
+      if(gameDecks[i].length === 0) {
+        deckDOM[i].classList.add('hidden');
+      } else {
+        deckDOM[i].classList.remove('hidden');
+      }
     }
-  }
 }
 
 function displayCenterPile() {
   resetCenterPile();
   if (currentGame.centerPile.length > 0) {
-    var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card cards">`;
+    var topCard = `<img src=${currentGame.centerPile[0].src} alt="Current Played Card" class="current-card middle cards">`;
     centerDeck.insertAdjacentHTML('afterbegin', topCard);
+    changeBackgroundCardColor();
   }
 }
-
 
 function displayPlayerWinCount() {
   var player1WinCount = document.querySelector('.player-one-wins');
@@ -160,11 +161,9 @@ function displayPlayerWinCount() {
 }
 
 function displayGameWinner(event) {
-  window.addEventListener('keydown', stop)
+  window.removeEventListener('keydown', handlePlayerEvents);
   var pausedGame = setTimeout (resetGameAfterWin, 2000);
-  console.log('TIME');
 }
-
 
 function resetGameAfterWin(event) {
   currentGame.resetDeck();
@@ -173,10 +172,17 @@ function resetGameAfterWin(event) {
   gameMessage.innerText = '';
 }
 
-function stop(event) {
-  if(event.key === 'f' || event.key === 'j')
-  event.preventDefault();
-  event.stopPropagation();
+function changeBackgroundCardColor() {
+  var middleCard = document.querySelector('.middle');
+    if (currentGame.player1.hand.length === 0 && currentGame.player2.currentPlayer) {
+      middleCard.classList.add('card-style');
+    } else if (currentGame.player2.hand.length === 0 && currentGame.player1.currentPlayer) {
+      middleCard.classList.remove('card-style');
+    } else if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
+      middleCard.classList.add('card-style');
+    } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
+    middleCard.classList.remove('card-style');
+    }
 }
 
 function resetCenterPile() {
