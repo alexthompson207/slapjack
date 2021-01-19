@@ -7,6 +7,8 @@
   padding: 0;
 }
 
+/* ---- GAME/UPDATES TEXT ---- */
+
 .main-view {
   background-color: #F0A714;
   font-family: 'PT Serif', serif;
@@ -15,21 +17,6 @@
 .player-one-deck,
 .player-two-deck {
   text-align: center;
-}
-
-.cards {
-  width: 250px;
-  height: 375px;
-  border-radius: 20px;
-  margin-top: 80px;
-  margin-bottom: 20px;
-  box-shadow: -10px 0 20px #0b6fe7,
-    10px 0 20px #0b6fe7;
-}
-
-.card-style {
-  box-shadow: -10px 0 20px rgb(179,28,181),
-  10px 0 20px rgb(179,28,181);
 }
 
 .title {
@@ -49,6 +36,22 @@
 .game-view {
   display: flex;
   justify-content: space-around;
+}
+/* ---- CARDS ---- */
+
+.cards {
+  width: 250px;
+  height: 375px;
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  box-shadow: -10px 0 20px #0b6fe7,
+  10px 0 20px #0b6fe7;
+}
+
+.card-style {
+  box-shadow: -10px 0 20px rgb(179,28,181),
+  10px 0 20px rgb(179,28,181);
 }
 
 .control-box {
