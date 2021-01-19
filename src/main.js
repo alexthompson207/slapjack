@@ -28,12 +28,10 @@ function handlePlayerEvents(event) {
 }
 
 function handlePlayer1Turn() {
-  // for later both players hands equal 0 restart game
   if (currentGame.player1.hand.length === 1 && currentGame.player2.hand.length === 0) {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player2.hand.length === 0) {
-    console.log('One');
     currentGame.survivalPlayerTurn();
     displayCenterPile();
   } else {
@@ -47,7 +45,6 @@ function handlePlayer2Turn() {
     currentGame.playCardToMiddle();
     currentGame.survivalShuffle();
   } else if (currentGame.player1.hand.length === 0) {
-    console.log('Two');
     currentGame.survivalPlayerTurn();
     displayCenterPile();
   } else {
@@ -63,18 +60,11 @@ function handleSlapOutcome(event) {
   } else if (currentCard === 11 || (currentGame.centerPile.length > 1) && (currentCard === currentGame.centerPile[1].number) || (currentGame.centerPile.length > 2) && (currentCard === currentGame.centerPile[2].number)) {
     displayLegalSlapUpdate(currentCard, event);
     currentGame.legalSlap(event);
-    console.log('SLAPPER!!');
   } else {
     currentGame.badSlap(event);
     displayBadSlapUpdate(event);
-
-    console.log('BAD SLAP');
   }
   displayCenterPile();
-}
-
-function handleBadSlap(event) {
-  currentGame.badSlap(event);
 }
 
 function handleSurvivalRoundSlap(event, currentCard) {
