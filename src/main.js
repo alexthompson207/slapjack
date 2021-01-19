@@ -1,7 +1,7 @@
-var currentGame;
-
 var centerDeck = document.querySelector('.center-deck');
 var gameMessage = document.querySelector('.game-update');
+
+var currentGame;
 
 window.addEventListener('load', startNewGame);
 
@@ -50,7 +50,7 @@ function handlePlayer2Turn() {
   } else {
     currentGame.playCardToMiddle();
   }
-  gameMessage.innerText = '';
+  // gameMessage.innerText = '';
 }
 
 function handleSlapOutcome(event) {
@@ -83,36 +83,36 @@ function handleSurvivalRoundSlap(event, currentCard) {
 
 function displayLegalSlapUpdate(currentCard, event) {
   gameMessage.innerText = '';
-  if(currentCard === 11 && event.key === 'f' ) {
+  if (currentCard === 11 && event.key === 'f' ) {
     gameMessage.innerText = `SLAPJACK! Player 1 takes the pile!`;
   } else if (currentCard === 11 && event.key === 'j' ) {
-  gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
+    gameMessage.innerText = `SLAPJACK! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'f' ) {
-  gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
+    gameMessage.innerText = `DOUBLE! Player 1 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[1].number) && event.key === 'j' ) {
-  gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
+    gameMessage.innerText = `DOUBLE! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'j' ) {
-  gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
+    gameMessage.innerText = `SANDWICH! Player 2 takes the pile!`;
   } else if ((currentCard === currentGame.centerPile[2].number) && event.key === 'f' ) {
-  gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
+    gameMessage.innerText = `SANDWICH! Player 1 takes the pile!`;
   }
 }
 
 function displayBadSlapUpdate(event) {
   gameMessage.innerText = '';
-  if(event.key === 'f') {
+  if (event.key === 'f') {
     gameMessage.innerText = `BAD SLAP! Player 1 forfeits a card to Player 2!`;
   } else if (event.key === 'j') {
-  gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
+    gameMessage.innerText = `BAD SLAP! Player 2 forfeits a card to Player 1!`;
   }
 }
 
 function displayGameWinSlapUpdate(event) {
   gameMessage.innerText = '';
-  if(currentGame.player2.hand.length === 0) {
+  if (currentGame.player2.hand.length === 0) {
     gameMessage.innerText = `Player 1 WINS!`;
   } else if (currentGame.player1.hand.length === 0) {
-  gameMessage.innerText = `Player 2 WINS!`;
+    gameMessage.innerText = `Player 2 WINS!`;
   }
   displayGameWinner(event);
 }
@@ -123,7 +123,7 @@ function displayPlayerDeck() {
   var gameDecks = [currentGame.player1.hand, currentGame.player2.hand];
   var deckDOM = [playerOneDeck, playerTwoDeck];
     for (var i = 0; i < gameDecks.length; i++) {
-      if(gameDecks[i].length === 0) {
+      if (gameDecks[i].length === 0) {
         deckDOM[i].classList.add('hidden');
       } else {
         deckDOM[i].classList.remove('hidden');
@@ -165,10 +165,10 @@ function changeBackgroundCardColor() {
       middleCard.classList.add('card-style');
     } else if (currentGame.player2.hand.length === 0 && currentGame.player1.currentPlayer) {
       middleCard.classList.remove('card-style');
-    } else if(currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
+    } else if (currentGame.player1.currentPlayer && currentGame.player1.hand.length != 0) {
       middleCard.classList.add('card-style');
     } else if (currentGame.player2.currentPlayer && currentGame.player2.hand.length != 0) {
-    middleCard.classList.remove('card-style');
+      middleCard.classList.remove('card-style');
     }
 }
 
