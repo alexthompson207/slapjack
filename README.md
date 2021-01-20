@@ -20,6 +20,7 @@
 - [Challenges](#challenges)
 - [Wins](#wins)
 - [Functionality](#functionality)
+- [Future Iterations](#future-iterations)
 - [Contributors](#contributors)
 - [Contact](#contact)
 
@@ -105,6 +106,11 @@ The game starts with player 1's turn. Players deal cards from their hand to a mi
 - When a player has won, the win score is updated to the `Data Model` and `localStorage`
 - The `DOM` displays all of the data representing this game as events happen, to allow the users an experience of a real card game.
 - The game automatically restarts, randomly shuffling all the cards and dealing them out to the players, displaying a game update instructoring player 1 to go first.
+
+## Future Iterations
+
+- In the future I would like to be able to scale this application to fit all screen sizes, it'd be really cool to be able to play this game on phones, tablets, and bigger computer screens.
+- When a player has no cards left (survival round), maybe the diplay changes or darkens, and spooky music plays.
 
 ## Contributers
 
